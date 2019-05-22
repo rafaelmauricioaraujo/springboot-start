@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.model.Product;
+
 import java.util.HashMap;
 import java.util.Map;
 
