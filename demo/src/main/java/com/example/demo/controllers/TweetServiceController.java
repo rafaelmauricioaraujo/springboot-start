@@ -1,8 +1,9 @@
-package com.example.demo;
+package com.example.demo.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.example.model.Tweet;
+
+import com.example.demo.model.Tweet;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

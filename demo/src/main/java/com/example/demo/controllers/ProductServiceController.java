@@ -1,6 +1,6 @@
-package com.example.demo;
+package com.example.demo.controllers;
 
-import com.example.model.Product;
+import com.example.demo.model.Product;
 
 import java.util.HashMap;
 import java.util.Map;
