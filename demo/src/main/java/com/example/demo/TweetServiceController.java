@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import com.example.model.Tweet;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -49,6 +51,18 @@ public class TweetServiceController{
     @RequestMapping(value = "/tweets")
     public List<Tweet> getTweets() {
         return tweets;
+    }
+
+    /**
+     * 
+     * @param tweet
+     * @return mesangem de sucesso para criação de tweet
+     */
+
+    @RequestMapping(value= "/tweets", method=RequestMethod.POST)
+    public String createTweet(@RequestBody Tweet tweet){
+        tweets.add(tweet);
+        return "Tweet criado com sucesso";
     }
     
 
