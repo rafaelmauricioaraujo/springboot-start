@@ -90,9 +90,15 @@ public class TweetServiceController {
       return tweets;
    }
 
+   /**
+    * 
+    * @param number índice do tweet no array
+    * @return tweet selecionado
+    */
+
    @RequestMapping(value= "/tweets/{number}", method = RequestMethod.GET)
    public Tweet getTweet(@PathVariable("number") int number){
        return tweets.get(number);
    }
-   
+
 }
