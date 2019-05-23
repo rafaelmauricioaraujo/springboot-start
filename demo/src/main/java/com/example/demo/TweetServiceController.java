@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import com.example.model.Tweet;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TweetServiceController{
+public class TweetServiceController {
 
     private static List<Tweet> tweets = new ArrayList<>();
 
-    static{
+    static {
 
         Tweet tweet1 = new Tweet();
         tweet1.setNumber(01);
@@ -43,7 +44,6 @@ public class TweetServiceController{
      * Iniciando CRUD de tweet
      */
 
-
     /**
      * 
      * @return lista de tweets
@@ -59,12 +59,24 @@ public class TweetServiceController{
      * @return mesangem de sucesso para criação de tweet
      */
 
-    @RequestMapping(value= "/tweets", method=RequestMethod.POST)
-    public String createTweet(@RequestBody Tweet tweet){
+    @RequestMapping(value = "/tweets", method = RequestMethod.POST)
+    public String createTweet(@RequestBody Tweet tweet) {
         tweets.add(tweet);
         return "Tweet criado com sucesso";
     }
-    
+
+    /**
+     * 
+     * @param index índice do array representando a posição do tweet
+     * @param tweet informações passadas no corpo da req para update
+     * @return lisat de tweets
+     */
+
+    @RequestMapping(value = "/tweets/{index}", method = RequestMethod.PUT)
+    public List<Tweet> updateTweet(@PathVariable("index") int index, @RequestBody Tweet tweet) {
+        tweets.set(index, tweet);
+        return tweets;
+    }
 
 
 
