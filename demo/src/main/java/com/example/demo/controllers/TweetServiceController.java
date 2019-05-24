@@ -1,7 +1,8 @@
 package com.example.demo.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.example.demo.model.Tweet;
 
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TweetServiceController {
 
-    private static List<Tweet> tweets = new ArrayList<>();
+    private static Map<Integer, Tweet> tweets = new HashMap<>();
 
     static {
 
@@ -36,8 +37,8 @@ public class TweetServiceController {
         tweet2.setUrl("www.tweet2.com.br");
         tweet2.setPefurl("pefurl");
 
-        tweets.add(tweet1);
-        tweets.add(tweet2);
+        tweets.put(tweet1.getNumber(), tweet1);
+        tweets.put(tweet2.getNumber(), tweet2);
 
     }
 
@@ -50,8 +51,8 @@ public class TweetServiceController {
      * @return lista de tweets
      */
     @RequestMapping(value = "/tweets")
-    public List<Tweet> getTweets() {
-        return tweets;
+    public Collection<Tweet> getTweets() {
+        return tweets.values();
     }
 
     /**
@@ -62,7 +63,7 @@ public class TweetServiceController {
 
     @RequestMapping(value = "/tweets", method = RequestMethod.POST)
     public String createTweet(@RequestBody Tweet tweet) {
-        tweets.add(tweet);
+        tweets.put(tweet.getNumber(), tweet);
         return "Tweet criado com sucesso";
     }
     /**
@@ -72,9 +73,11 @@ public class TweetServiceController {
      * @return lisat de tweets após o update
      */
     @RequestMapping(value = "/tweets/{id}", method = RequestMethod.PUT)
-    public List<Tweet> updateTweet(@PathVariable("id") int id, @RequestBody Tweet tweet) {
-        tweets.set(id, tweet);
-        return tweets;
+    public String updateTweet(@PathVariable("id") int id, @RequestBody Tweet tweet) {
+        tweets.remove(tweet.getNumber());
+        tweet.setNumber(id);
+        tweets.put(tweet.getNumber(), tweet);
+        return "Tweet alterado com sucesso";
     }
     /**
      * 
@@ -83,9 +86,9 @@ public class TweetServiceController {
      */
 
     @RequestMapping(value = "/tweets/{id}", method = RequestMethod.DELETE)
-    public List<Tweet> delete(@PathVariable("id") int id) { 
+    public String delete(@PathVariable("id") int id) { 
       tweets.remove(id);
-      return tweets;
+      return "Tweet removido com sucesso";
    }
    /**
     * 
