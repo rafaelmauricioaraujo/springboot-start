@@ -65,32 +65,28 @@ public class TweetServiceController {
         tweets.add(tweet);
         return "Tweet criado com sucesso";
     }
-
     /**
      * 
      * @param index índice do array representando a posição do tweet
      * @param tweet informações passadas no corpo da req para update
      * @return lisat de tweets após o update
      */
-
-    @RequestMapping(value = "/tweets/{index}", method = RequestMethod.PUT)
-    public List<Tweet> updateTweet(@PathVariable("index") int index, @RequestBody Tweet tweet) {
-        tweets.set(index, tweet);
+    @RequestMapping(value = "/tweets/{id}", method = RequestMethod.PUT)
+    public List<Tweet> updateTweet(@PathVariable("id") int id, @RequestBody Tweet tweet) {
+        tweets.set(id, tweet);
         return tweets;
     }
-
     /**
      * 
      * @param id // índice do array representa a posição do tweet
      * @return // lista de tweets apos a remoção
      */
 
-    @RequestMapping(value = "/tweets/{index}", method = RequestMethod.DELETE)
-    public List<Tweet> delete(@PathVariable("index") int id) { 
+    @RequestMapping(value = "/tweets/{id}", method = RequestMethod.DELETE)
+    public List<Tweet> delete(@PathVariable("id") int id) { 
       tweets.remove(id);
       return tweets;
    }
-
    /**
     * 
     * @param number índice do tweet no array
