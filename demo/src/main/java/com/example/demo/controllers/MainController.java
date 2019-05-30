@@ -24,9 +24,5 @@ public class MainController {
         productRepository.save(product);
         return "Product adicionado";
     }
-    
-
-    
-    
 
 }
